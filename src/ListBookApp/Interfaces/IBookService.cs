@@ -6,7 +6,10 @@ namespace ListBookApp.Interfaces
 {
     public interface IBookService
     {
-        public IEnumerable<Book> GetAll();
-        public Book Create(CreateBook book);
+        public IEnumerable<AllBook> GetAll();
+        public AllBook Create(CreateBook book);
+        public EditBook Edit(EditBook book,int id);
+        public void Delete(int id);
+        public AllBook GetById(int id);
     }
 }

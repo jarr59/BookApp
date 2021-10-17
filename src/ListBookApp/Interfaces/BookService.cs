@@ -13,7 +13,7 @@ namespace ListBookApp.Interfaces
         {
             _context = context;
         }
-        public Book Create(CreateBook model)
+        public AllBook Create(CreateBook model)
         {
             var book = new Book
             {   
@@ -25,11 +25,59 @@ namespace ListBookApp.Interfaces
 
             _context.SaveChanges();
 
-            return book;
+            return new AllBook{  
+                IdBook = book.IdBook,
+                Name = book.Name,
+                ISBN = book.ISBN
+            };
         }
-        public IEnumerable<Book> GetAll()
+
+        public void Delete(int id)
         {
-            return _context.Books.ToList();
+            var bookSearched =_context.Books.Where(x=>x.IdBook==id).First();
+            _context.Books.Remove(bookSearched);
+            _context.SaveChanges();
+        }
+
+        public EditBook Edit(EditBook bookEdit, int id)
+        {
+            var bookSearched =_context.Books.Where(x=>x.IdBook==id).FirstOrDefault();
+            if(bookSearched is not null)
+            {
+                bookSearched.Name = bookEdit.Name;
+                bookSearched.ISBN = bookEdit.ISBN;
+                _context.Entry(bookSearched).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                _context.SaveChanges();
+                return bookEdit;
+            } 
+            return null;
+        }
+
+        public IEnumerable<AllBook> GetAll()
+        {
+            List<AllBook> allBooks = new List<AllBook>();
+            var books =_context.Books.ToList();
+            for(int i = 0; i < _context.Books.Count(); i++)
+            {
+                allBooks.Add(new AllBook
+                {
+                    IdBook = books[i].IdBook,
+                    Name = books[i].Name,
+                    ISBN =books[i].ISBN
+                });
+            }   
+            return allBooks;
+        }
+
+        public AllBook GetById(int id)
+        {
+            var book = _context.Books.Where(x=>x.IdBook == id).First();
+            return new AllBook
+            {
+                IdBook = book.IdBook,
+                Name = book.Name,
+                ISBN = book.ISBN
+            };
         }
     }
 }
