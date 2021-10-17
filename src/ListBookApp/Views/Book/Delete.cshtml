@@ -1,0 +1,26 @@
+@model ListBookApp.Models.Book.DeleteBook
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Do you sure delete this Book?</h1>
+<div class="row">
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">@Html.DisplayFor(x=>x.Name)</h5>
+            <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(x=>x.ISBN)</h6>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+                content.</p>
+            <div class="row">
+                <form asp-action="Delete" method="post">
+                    <input asp-for="IdBook" type="hidden">
+                    <input asp-for="Name" type="hidden">
+                    <input asp-for="ISBN" type="hidden">
+                    <input type="submit" value="Delete" class="btn btn-danger ml-3">
+                </form>
+                <a asp-action="Index" class="btn btn-info ml-5">Back</a>
+            </div>
+        </div>
+    </div>
+</div>
