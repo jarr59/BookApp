@@ -1,31 +1,31 @@
-using ListBookApp.Entites;
+using ListBookApp.Interfaces;
+using ListBookApp.Models.Book;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
 
 namespace ListBookApp.Controllers
 {
     public class BookController : Controller
     {
-        public BookDbContext _dbContext;
-        public BookController(BookDbContext dbContext)
+        private readonly IBookService _service;
+
+        public BookController(IBookService service)
         {
-            _dbContext = dbContext;
+            _service = service;
         }
         public IActionResult Index()
         {
-            return View(_dbContext.Books.ToList());   
+            return View(_service.GetAll());   
         }
         public IActionResult Create()
         {
             return View();
         }
         [HttpPost]
-        public IActionResult Create(Book book)
+        public IActionResult Create(CreateBook book)
         {
             if(ModelState.IsValid)
             {
-                _dbContext.Books.Add(book);
-                _dbContext.SaveChanges();
+                _service.Create(book);
                 return RedirectToAction(nameof(Index));
             }
             return View(book);
