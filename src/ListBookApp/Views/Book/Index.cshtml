@@ -1,4 +1,4 @@
-@model IEnumerable<ListBookApp.Entites.Book>
+@model IEnumerable<ListBookApp.Models.Book.AllBook>
 
 @{
     ViewData["Title"]  = "Index";
@@ -24,7 +24,9 @@
                     <td>@item.ISBN</td>
                     <td>
                         <a asp-action="Edit" asp-route-id="@item.IdBook"
-                            class="btn btn-outline-primary">Editar</a>
+                            class="btn btn-outline-primary">Edit</a>
+                            <a asp-action="Delete" asp-route-id="@item.IdBook"
+                            class="btn btn-outline-warning">Delete</a>
                     </td>
                 </tr>
             }
