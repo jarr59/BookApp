@@ -1,23 +1,27 @@
-@model ListBookApp.Entites.Book
+@model ListBookApp.Models.Book.CreateBook
 
 @{
     ViewData["Title"] = "Create";
 }
 
-<div class="row">
-    <form asp-action="Create" method="post">
+<div class="row border-left">
+    <form asp-action="Create" method="post" class="m-5">
+        <div asp-validation-summary="ModelOnly"></div>
         <div class="row form-group">
             <label asp-for="Name"></label>
             <input asp-for="Name" maxlength="200" accesskey="n" tabindex="1"
                 class="form-control">
+            <span asp-validation-for="Name"></span>
         </div>
         <div class="row form-group">
             <label asp-for="ISBN"></label>
             <input asp-for="ISBN" maxlength="16" accesskey="I" tabindex="2"
                 class="form-control">
+            <span asp-validation-for="ISBN"></span>
         </div>
         <div class="row form-group">
             <input type="submit" class="btn btn-success" value="Save" tabindex="3" accesskey="s">
+            <a type="button" class="btn btn-dark ml-5" tabindex="4" accesskey="b">Back</a>
         </div>
     </form>
 </div>
