@@ -1,0 +1,33 @@
+@model IEnumerable<ListBookApp.Entites.Book>
+
+@{
+    ViewData["Title"]  = "Index";
+}
+
+<div class="row">
+    <a asp-action="Create" class="btn btn-outline-success mt-2 mb-2">Create</a>
+    <table class="table table-bordered"> 
+        <thead class="thead-dark">
+            <tr>
+                <th>@Html.DisplayNameFor(x=>x.IdBook)</th>
+                <th>@Html.DisplayNameFor(x=>x.Name)</th>
+                <th>@Html.DisplayNameFor(x=>x.ISBN)</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.IdBook</td>
+                    <td>@item.Name</td>
+                    <td>@item.ISBN</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.IdBook"
+                            class="btn btn-outline-primary">Editar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

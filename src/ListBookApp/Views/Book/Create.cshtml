@@ -1,0 +1,23 @@
+@model ListBookApp.Entites.Book
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="row">
+    <form asp-action="Create" method="post">
+        <div class="row form-group">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" maxlength="200" accesskey="n" tabindex="1"
+                class="form-control">
+        </div>
+        <div class="row form-group">
+            <label asp-for="ISBN"></label>
+            <input asp-for="ISBN" maxlength="16" accesskey="I" tabindex="2"
+                class="form-control">
+        </div>
+        <div class="row form-group">
+            <input type="submit" class="btn btn-success" value="Save" tabindex="3" accesskey="s">
+        </div>
+    </form>
+</div>
